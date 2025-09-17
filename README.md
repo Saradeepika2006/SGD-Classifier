@@ -7,22 +7,60 @@ To write a program to predict the type of species of the Iris flower using the S
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1. Import the necessary libraries
+2. Load the dataset using sklearn.datasets()
+3. Convert the dataset into a dataframe
+4. Define the input and target variable
+5. Split the dataset into training and testing data
+6. Train the model using SGDClassifier(),.fit() and predict using .predict()
+7. Measure the accuracy of the model using accuracy_score() and confusion_matrix()
 
 ## Program:
 ```
 /*
 Program to implement the prediction of iris species using SGD Classifier.
-Developed by: 
-RegisterNumber:  
+Developed by: MOPURI SARADEEPIKA
+RegisterNumber:  212224040201
 */
+      import pandas as pd
+      from sklearn.datasets import load_iris
+      from sklearn.linear_model import SGDClassifier
+      from sklearn.model_selection import train_test_split
+      from sklearn.metrics import accuracy_score,confusion_matrix
+      import matplotlib.pyplot as plt
+      import seaborn as sns
+      
+      iris=load_iris()
+      
+      df=pd.DataFrame(data=iris.data,columns=iris.feature_names)
+      df['target']=iris.target
+      
+      print(df.head())
+      print(df.tail())
+      
+      x=df.drop('target',axis=1)
+      y=df['target']
+      
+      x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+      
+      sgd=SGDClassifier(max_iter=1000,tol=1e-3)
+      sgd.fit(x_train,y_train)
+      y_pred=sgd.predict(x_test)
+      
+      acc=accuracy_score(y_test,y_pred)
+      print(acc)
+      cm=confusion_matrix(y_test,y_pred)
+      print(cm)
 ```
 
 ## Output:
-![prediction of iris species using SGD Classifier](sam.png)
+
+
+<img width="1181" height="467" alt="Screenshot 2025-09-17 103253" src="https://github.com/user-attachments/assets/989bf8a2-e6eb-4b75-a8d3-87dd8221ca56" />
+
+<img width="1155" height="85" alt="Screenshot 2025-09-17 103310" src="https://github.com/user-attachments/assets/cbd2c0a2-c496-4896-8ec7-dcb1b9856158" />
+
+
 
 
 ## Result:
